@@ -1,6 +1,10 @@
 const express = require("express");
 const raffles = express.Router();
 
+// nested route for participants inside rafflesController
+const participantsController = require('./participantsController.js');
+raffles.use("/:raffleId/participants", participantsController);
+
 const {
     getAllRaffles,
     getOneRaffleById
