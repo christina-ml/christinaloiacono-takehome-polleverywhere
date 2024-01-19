@@ -7,7 +7,8 @@ raffles.use("/:raffleId/participants", participantsController);
 
 const {
     getAllRaffles,
-    getOneRaffleById
+    getOneRaffleById,
+    createNewRaffle
 } = require('../queries/raffles');
 
 raffles.get('/', async (req, res) => {
@@ -37,5 +38,18 @@ raffles.get('/:id', async (req, res) => {
     }
 })
 
+raffles.post('/', async (req, res) => {
+    const { body } = req;
+    try {
+        const newRaffle = await createNewRaffle(body);
+        if (newRaffle.id){
+            res.status(200).json(newRaffle);
+        } else {
+            res.status(500).json({ error: "Error: new raffle could not be created" });
+        }
+    } catch (err){
+        console.log(err);
+    }
+})
 
 module.exports = raffles;

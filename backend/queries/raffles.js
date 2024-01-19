@@ -18,7 +18,21 @@ const getOneRaffleById = async (id) => {
     }
 }
 
+const createNewRaffle = async (raffle) => {
+    const { name, secret_token } = raffle;
+    try {
+        const newRaffle = await db.one(
+            "INSERT INTO raffles (name, secret_token) VALUES ($1, $2) RETURNING *",
+            [name, secret_token]
+        );
+        return newRaffle;
+    } catch (err) {
+        return err;
+    }
+}
+
 module.exports = {
     getAllRaffles,
-    getOneRaffleById
+    getOneRaffleById,
+    createNewRaffle
 };
