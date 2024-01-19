@@ -11,6 +11,7 @@ const {
     createNewRaffle
 } = require('../queries/raffles');
 
+// GET	/api/raffles
 raffles.get('/', async (req, res) => {
     try {
         const allRaffles = await getAllRaffles();
@@ -24,6 +25,7 @@ raffles.get('/', async (req, res) => {
     }
 })
 
+// GET	/api/raffles/:id
 raffles.get('/:id', async (req, res) => {
     const { id } = req.params;
     try {
@@ -38,6 +40,7 @@ raffles.get('/:id', async (req, res) => {
     }
 })
 
+// 	POST	/api/raffles
 raffles.post('/', async (req, res) => {
     const { body } = req;
     try {

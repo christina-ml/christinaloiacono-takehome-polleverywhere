@@ -1,5 +1,6 @@
 const db = require("../db/dbConfig");
 
+// GET	/api/raffles
 const getAllRaffles = async () => {
     try {
         const allRaffles = await db.any("SELECT * FROM raffles");
@@ -9,6 +10,7 @@ const getAllRaffles = async () => {
     }
 }
 
+// GET	/api/raffles/:id
 const getOneRaffleById = async (id) => {
     try {
         const oneRaffleById = await db.oneOrNone("SELECT * FROM raffles WHERE id=$1", id);
@@ -18,6 +20,7 @@ const getOneRaffleById = async (id) => {
     }
 }
 
+// 	POST	/api/raffles
 const createNewRaffle = async (raffle) => {
     const { name, secret_token } = raffle;
     try {
