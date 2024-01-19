@@ -9,6 +9,16 @@ const getAllRaffles = async () => {
     }
 }
 
+const getOneRaffleById = async (id) => {
+    try {
+        const oneRaffleById = await db.oneOrNone("SELECT * FROM raffles WHERE id=$1", id);
+        return oneRaffleById;
+    } catch (err) {
+        return err;
+    }
+}
+
 module.exports = {
-    getAllRaffles
+    getAllRaffles,
+    getOneRaffleById
 };
