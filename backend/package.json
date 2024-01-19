@@ -8,7 +8,7 @@
     "start": "node server.js",
     "db:init": "psql -U postgres -f db/schema.sql",
     "db:seed": "psql -U postgres -f db/seed.sql",
-    "db:initseed": "psql -U postgres -f db/schema.sql && psql -U postgres -f db/seed.sql"
+    "db:reset": "psql -U postgres -f db/schema.sql && psql -U postgres -f db/seed.sql"
   },
   "author": "Christina Loiacono",
   "license": "ISC",
