@@ -10,7 +10,9 @@ DROP TABLE IF EXISTS raffles;
 CREATE TABLE raffles (
     id SERIAL PRIMARY KEY,
     name VARCHAR(255) UNIQUE NOT NULL,
-    secret_token VARCHAR(255) UNIQUE NOT NULL
+    secret_token VARCHAR(255) UNIQUE NOT NULL,
+    created_on TIMESTAMP,
+    raffled_on TIMESTAMP
 );
 
 CREATE TABLE participants (
