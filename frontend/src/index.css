@@ -1,7 +1,9 @@
 body {
+    margin: 0;
     /* <weight>: Use a value from 200 to 900 */
     font-family: "Source Sans 3", sans-serif;
     font-optical-sizing: auto;
     font-weight: 400;
     font-style: normal;
 }
+  
