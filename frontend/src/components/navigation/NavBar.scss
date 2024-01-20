@@ -1,0 +1,24 @@
+@import './../../designUtils/colors';
+
+.NavBar {
+    text-align: center;
+    font-weight: 600;
+    font-size: 30px;
+    color: $pollev-blue;
+    padding: 0 15px;
+    
+    &__container {
+        max-width: 1200px;
+        margin: 0 auto;
+
+        &__logo {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            
+            img {
+                margin-right: 10px;
+            }
+        }
+    }
+}
