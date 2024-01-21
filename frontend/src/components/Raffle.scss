@@ -1,0 +1,35 @@
+@import './../designUtils/colors';
+
+.Raffle {
+    border: 1px solid $grey;
+    margin: 15px 0px;
+    padding: 10px;
+    border-radius: 6px;
+    a {    
+        text-decoration: none;
+        color: $black;
+    }
+    &:hover {
+        background-color: $light-grey;
+        transition: 0.3s;
+    }
+
+    &__name {
+        font-weight: 600;
+        font-size: 20px;
+    }
+
+    &__details {
+        display: flex;
+
+        &__icon {
+            display: flex;
+            justify-content: left;
+            align-items: center;
+        }
+    }
+
+    &__details  > *{
+        margin-right: 5px;
+    }
+}
