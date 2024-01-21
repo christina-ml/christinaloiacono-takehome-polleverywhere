@@ -1,0 +1,46 @@
+@import "./../designUtils/colors";
+
+.Winner {
+	&__title {
+		font-size: 25px;
+		font-weight: 600;
+	}
+
+	&__card {
+		margin: 0 auto;
+		width: 300px;
+		border-radius: 3px;
+		box-shadow: 0px 2px 3px $grey;
+
+		&__congrats {
+			img {
+				height: 300px;
+				width: 300px;
+				filter: grayscale(100%);
+			}
+		}
+
+		&__details {
+			padding: 0px 10px 10px 10px;
+            
+			&__name {
+				font-weight: 600;
+			}
+
+			&__registeredOn {
+				color: $grey;
+			}
+
+			hr {
+				color: $grey;
+			}
+
+			&__info {
+				color: $grey;
+				display: flex;
+				place-items: center;
+				column-gap: 8px;
+			}
+		}
+	}
+}
