@@ -15,7 +15,7 @@ participants.get('/', async (req, res) => {
         if (allParticipantsByRaffleId[0]){
             res.status(200).json(allParticipantsByRaffleId);
         } else {
-            res.status(500).json({ error: `Error: there are no participants for raffle id ${raffleId}` });
+            res.status(204).json({ message: `: No participants found for raffle id ${raffleId}` });
         }
     } catch (err){
         console.log(err);
