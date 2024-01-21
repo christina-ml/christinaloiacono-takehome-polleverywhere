@@ -1,0 +1,30 @@
+@import "./../designUtils/colors";
+
+.ParticipantDetails {
+	display: flex;
+	border-bottom: 1px solid $medium-grey;
+	padding: 15px 0px;
+
+	&:last-child {
+		border-bottom: none;
+	}
+
+	&__profile {
+		margin-right: 10px;
+		img {
+			border-radius: 50%;
+		}
+	}
+    
+	&__contact {
+		&__name {
+			font-weight: 600;
+			padding: 10px 0px;
+		}
+		&__info {
+			display: flex;
+			place-items: center;
+			column-gap: 8px;
+		}
+	}
+}
