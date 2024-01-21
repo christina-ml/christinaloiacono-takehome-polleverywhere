@@ -1,11 +1,13 @@
 import { useParams } from "react-router-dom";
-import "./SingleRaffle.scss";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import RaffleNav from "./navigation/RaffleNav";
+import RegisterSignUpForm from "./RegisterSignUpForm";
+import "./SingleRaffle.scss";
 
 const SingleRaffle = () => {
 	const API = process.env.REACT_APP_API_URL;
-    const [raffle, setRaffle] = useState([]);
+	const [raffle, setRaffle] = useState([]);
 
 	let { id } = useParams();
 
@@ -21,10 +23,12 @@ const SingleRaffle = () => {
 	}, [id]);
 
 	return (
-    <div className="SingleRaffle">
-        <div className="SingleRaffle__title">{raffle.name}</div>
-    </div>
-    )
+		<div className="SingleRaffle">
+			<div className="SingleRaffle__title">{raffle.name}</div>
+			<RaffleNav />
+			<RegisterSignUpForm />
+		</div>
+	);
 };
 
 export default SingleRaffle;
