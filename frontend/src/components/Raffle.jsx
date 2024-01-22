@@ -1,7 +1,7 @@
 import "./Raffle.scss";
+import { Link } from "react-router-dom";
 import { ImTrophy } from "react-icons/im";
 import { FaRegCalendarPlus, FaRegCalendarCheck } from "react-icons/fa";
-import { Link } from "react-router-dom";
 
 const Raffle = ({ raffle }) => {
 	return (

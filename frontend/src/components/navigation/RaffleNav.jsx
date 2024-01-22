@@ -8,10 +8,8 @@ import { BsPencilSquare } from "react-icons/bs";
 import { MdGroups } from "react-icons/md";
 
 // Material UI
-import Tabs from "@mui/material/Tabs";
-import Tab from "@mui/material/Tab";
-import Box from "@mui/material/Box";
-import styled from "@mui/system/styled";
+import { Box, Tab, Tabs } from "@mui/material";
+import styled from "@emotion/styled";
 
 // StyledTab component for setting background color for active Tab from MUI
 const StyledTab = styled(Tab)(({ selected }) => (
@@ -30,8 +28,6 @@ const StyledTab = styled(Tab)(({ selected }) => (
 
 const RaffleNav = () => {
 	const {id} = useParams();
-	console.log("id on RaffleNav page =>", id);
-	
 	let location = useLocation();
 	
 	const [currentTab, setCurrentTab] = useState(0);
