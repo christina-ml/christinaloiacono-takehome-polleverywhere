@@ -1,10 +1,10 @@
 import { useState } from "react";
+import RaffleNav from "./navigation/RaffleNav";
 import "./Winner.scss";
 
 // React Icons
 import { FaHashtag, FaPhone, FaKey } from "react-icons/fa";
 import { MdEmail } from "react-icons/md";
-import RaffleNav from "./navigation/RaffleNav";
 
 // Material UI
 import {
@@ -16,9 +16,16 @@ import {
 	TextField,
 	Typography,
 } from "@mui/material";
+import { useParams } from "react-router-dom";
 
-const Winner = () => {
+const Winner = ({raffles}) => {
 	const [winnerPicked, setWinnerPicked] = useState(false);
+
+	let { id } = useParams();
+
+	// Filter raffles to get name of current raffle
+	let filteredRaffles = raffles.filter((oneRaffle) => oneRaffle.id === Number(id));
+	// console.log("filteredRaffles", filteredRaffles[0].name)
 
 	const handleSubmit = () => {
 		// set to true, and never show the form again
@@ -27,6 +34,7 @@ const Winner = () => {
 
 	return (
 		<div className="Winner">
+			<div className="Winner__currentRaffleName">{filteredRaffles[0].name}</div>
 			<RaffleNav />
 			{winnerPicked === false ? (
 				<>
