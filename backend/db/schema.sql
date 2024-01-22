@@ -21,11 +21,11 @@ CREATE TABLE participants (
     lastname VARCHAR(255) NOT NULL,
     email VARCHAR(255) NOT NULL,
     phone VARCHAR(255),
-    raffle_id INTEGER REFERENCES raffles(id) ON DELETE CASCADE
+    raffle_id  INTEGER REFERENCES raffles(id) ON DELETE CASCADE
 );
 
 CREATE TABLE winners (
-    raffle_winner_id INTEGER REFERENCES raffles(id) ON DELETE CASCADE,
-    participant_winner_id INTEGER REFERENCES participants(id) ON DELETE CASCADE,
-    CONSTRAINT pk_winners_id PRIMARY KEY (raffle_winner_id, participant_winner_id)
+    id SERIAL PRIMARY KEY,
+    raffle_id INTEGER REFERENCES raffles(id) ON DELETE CASCADE,
+    winner_id INTEGER REFERENCES participants(id) ON DELETE CASCADE
 );
