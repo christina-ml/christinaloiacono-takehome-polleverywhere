@@ -1,0 +1,22 @@
+.NewRaffleForm {
+    margin-bottom: 20px;
+
+    &__title {
+        font-size: 25px;
+        font-weight: 600;
+        margin-bottom: 10px;
+    }
+
+    &__formContainer {
+        &__fields {
+            &__fieldLabel {
+                font-weight: 600;
+                font-size: 15px;
+            }
+        }
+    }
+
+    &__description {
+        padding-bottom: 10px;
+    }
+}
