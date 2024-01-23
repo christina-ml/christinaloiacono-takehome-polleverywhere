@@ -24,33 +24,21 @@ const Winner = ({ raffles, currRaffleId, raffleContext }) => {
 	const [winner, setWinner] = useState('');
 
 	useEffect(() => {
-		console.log("here", id)
 		if (id){
-			console.log("is there an id", id)
 			axios
 				.get(API + `/raffles/${id}/winner`)
 				.then((res) => {
 					setWinner(res.data);
-					console.log("-->", res.data)
-					console.log("winner:", winner)
 				})
 				.catch((err) => {
 					console.log("err", err);
 				})
-				.finally(() => {
-					console.log("finally")
-				})
 		}
 	}, [API, id]);
 
-	console.log("WINNER", currRaffleId)
-	const raffleInfo = useContext(currRaffleId)
-	console.log('raffleInfo', raffleInfo)
 	const [secretTokenInput, setSecretTokenInput] = useState({
 		secret_token: "",
 	});
-
-	console.log("raffles=>", raffles)
 
 	const [showError, setShowError] = useState('');
 
@@ -58,17 +46,13 @@ const Winner = ({ raffles, currRaffleId, raffleContext }) => {
 	let filteredRaffles = raffles.filter(
 		(oneRaffle) => oneRaffle.id === Number(id)
 	);
-	// console.log("filteredRaffles", filteredRaffles[0].name)
 
 	const handleTextChange = (event) => {
 		setSecretTokenInput({ ...secretTokenInput, [event.target.id]: event.target.value });
-		console.log("secretTokenInput=>", secretTokenInput);
 	};
 
 	// set to true, and never show the form again
 	const handleSubmit = (event) => {
-		console.log("handleSubmit", winner)
-
 		if (!winner){
 		event.preventDefault();
 		// if secret token matches, get participant information	
@@ -76,24 +60,17 @@ const Winner = ({ raffles, currRaffleId, raffleContext }) => {
 		axios
 			.put(API + `/raffles/${id}/winner`, secretTokenInput)
 			.then((res) => {
-			
-				console.log("res.status", res.status)
-
 				if (res.status === 200){
 					setWinner(res.data);
 				} else {
 					setShowError("wrong secret token");
 				}
-				
-				console.log("RES DATA:", res.data)
 			})
 			.catch((err) => {
 				console.log(err);
 			});
 		}
 	};
-
-	console.log("WINNER=>", winner);
 
 	return (
 		<div className="Winner">

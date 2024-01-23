@@ -25,7 +25,6 @@ function App() {
 			.get(API + "/raffles")
 			.then((res) => {
 				setRaffles(res.data);
-				// console.log("raffles:", raffles)
 				setLoading(false);
 			})
 			.catch((err) => {
@@ -39,8 +38,6 @@ function App() {
 			<div>Loading...</div>
 		)
 	}
-
-	// console.log("APP", currRaffleId)
 
 	// update state for raffles when a new raffle is created
 	const updateRaffles = (newRaffle) => {

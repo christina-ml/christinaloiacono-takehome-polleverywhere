@@ -10,8 +10,6 @@ const SingleRaffle = ({ currRaffleId, setCurrRaffleId }) => {
 
 	let { id } = useParams();
 
-	console.log("SINGLERAFFLE", currRaffleId)
-
 	useEffect(() => {
 		axios
 			.get(API + `/raffles/${id}`)

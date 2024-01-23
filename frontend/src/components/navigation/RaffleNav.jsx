@@ -55,8 +55,6 @@ const RaffleNav = ({ currRaffleId, setCurrRaffleId }) => {
 	const handleTabChange = (_event, selectedTab) => {
 		setCurrentTab(selectedTab);
 	};
-
-	// console.log("RAFFLENAV", currRaffleId, currentTab, "ID", id)
 	
 	return (
 		location.pathname !== '/' &&

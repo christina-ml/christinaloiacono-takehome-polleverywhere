@@ -19,13 +19,10 @@ const Participants = ({ raffles, currRaffleId }) => {
 
 	let { id } = useParams();
 
-	console.log("PARTICIPANTS", currRaffleId);
-
 	// Filter raffles to get name of current raffle
 	let filteredRaffles = raffles.filter(
 		(oneRaffle) => oneRaffle.id === Number(id)
 	);
-	// console.log("filteredRaffles", filteredRaffles[0].name)
 
 	useEffect(() => {
 		try {
