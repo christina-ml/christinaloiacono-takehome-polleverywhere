@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link, useParams, useLocation } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import "./RaffleNav.scss";
 
 // React Icons
@@ -9,25 +9,46 @@ import { MdGroups } from "react-icons/md";
 
 // Material UI
 import { Box, Tab, Tabs } from "@mui/material";
-import styled from "@emotion/styled";
 
-// StyledTab component for setting background color for active Tab from MUI
-const StyledTab = styled(Tab)(({ selected }) => (
-    {
-        backgroundColor: selected ? "lightgrey" : "white",
-        border: selected ? "1px solid #f0f0f0" : "1px solid #f0f0f0",
-        borderStyle: selected ? "solid solid" : "none solid",
-		color: selected ? "rgb(74,74,74)" : "rgb(74,74,74)",
-        margin: selected ? "-1px 0px -1px 0px" : "0px",
-        "&.Mui-selected": {
-            backgroundColor: selected ? "#f2f2f2" : "white",
-            color: selected ? "rgb(74,74,74)" : "rgb(74,74,74)",
-        },
-    }
-));
 
-const RaffleNav = () => {
-	const {id} = useParams();
+import PropTypes from 'prop-types';
+
+function samePageLinkNavigation(event) {
+  if (
+    event.defaultPrevented ||
+    event.button !== 0 || // ignore everything but left-click
+    event.metaKey ||
+    event.ctrlKey ||
+    event.altKey ||
+    event.shiftKey
+  ) {
+    return false;
+  }
+  return true;
+}
+
+function LinkTab(props) {
+  return (
+    <Tab
+      component="a"
+      onClick={(event) => {
+        // Routing libraries handle this, you can remove the onClick handle when using them.
+        if (samePageLinkNavigation(event)) {
+          event.preventDefault();
+        }
+      }}
+      aria-current={props.selected && 'page'}
+      {...props}
+    />
+  );
+}
+
+LinkTab.propTypes = {
+  selected: PropTypes.bool,
+};
+
+const RaffleNav = ({ currRaffleId, setCurrRaffleId }) => {
+	const id = currRaffleId;
 	let location = useLocation();
 	
 	const [currentTab, setCurrentTab] = useState(0);
@@ -35,6 +56,8 @@ const RaffleNav = () => {
 		setCurrentTab(selectedTab);
 	};
 
+	// console.log("RAFFLENAV", currRaffleId, currentTab, "ID", id)
+	
 	return (
 		location.pathname !== '/' &&
 		<div className="RaffleNav">
@@ -42,11 +65,11 @@ const RaffleNav = () => {
 				<Tabs
 					onChange={handleTabChange}
 					value={currentTab}
-                    indicatorColor="none"
                     color="secondary"
 					aria-label="tabs for meeting rooms, bookings, and new room"
+					selectionFollowsFocus
 				>
-					<StyledTab
+					<Tab
 						label={<><FaTicketAlt fontSize="25px" /><span>All Raffles</span></>}
 						style={{
 							minWidth: "25%",
@@ -58,7 +81,7 @@ const RaffleNav = () => {
 						component={Link}
 						to="/"
 					/>
-					<StyledTab
+					<Tab
 						label={<><BsPencilSquare fontSize="20px" /><span>Register</span></>}
 						style={{
 							minWidth: "25%",
@@ -70,7 +93,7 @@ const RaffleNav = () => {
 						component={Link}
 						to={`/raffles/${id}`}
 					/>
-					<StyledTab
+					<Tab
 						label={<><MdGroups fontSize="25px" /><span>Participants</span></>}
 						style={{
 							minWidth: "25%",
@@ -82,7 +105,7 @@ const RaffleNav = () => {
 						component={Link}
 						to={`/raffles/${id}/participants`}
 					/>
-					<StyledTab
+					<Tab
 						label={<><FaTrophy fontSize="20px" /><span>Pick Winner</span></>}
 						style={{
 							minWidth: "25%",
