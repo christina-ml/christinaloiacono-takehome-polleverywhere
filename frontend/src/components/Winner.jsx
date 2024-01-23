@@ -1,5 +1,4 @@
-import { useState } from "react";
-import RaffleNav from "./navigation/RaffleNav";
+import { useState, useContext, useEffect } from "react";
 import "./Winner.scss";
 
 // React Icons
@@ -17,11 +16,43 @@ import {
 	Typography,
 } from "@mui/material";
 import { useParams } from "react-router-dom";
+import axios from "axios";
 
-const Winner = ({ raffles }) => {
-	const [winnerPicked, setWinnerPicked] = useState(false);
-
+const Winner = ({ raffles, currRaffleId, raffleContext }) => {
+	const API = process.env.REACT_APP_API_URL;
 	let { id } = useParams();
+	const [winner, setWinner] = useState('');
+
+	useEffect(() => {
+		console.log("here", id)
+		if (id){
+			console.log("is there an id", id)
+			axios
+				.get(API + `/raffles/${id}/winner`)
+				.then((res) => {
+					setWinner(res.data);
+					console.log("-->", res.data)
+					console.log("winner:", winner)
+				})
+				.catch((err) => {
+					console.log("err", err);
+				})
+				.finally(() => {
+					console.log("finally")
+				})
+		}
+	}, [API, id]);
+
+	console.log("WINNER", currRaffleId)
+	const raffleInfo = useContext(currRaffleId)
+	console.log('raffleInfo', raffleInfo)
+	const [secretTokenInput, setSecretTokenInput] = useState({
+		secret_token: "",
+	});
+
+	console.log("raffles=>", raffles)
+
+	const [showError, setShowError] = useState('');
 
 	// Filter raffles to get name of current raffle
 	let filteredRaffles = raffles.filter(
@@ -29,25 +60,57 @@ const Winner = ({ raffles }) => {
 	);
 	// console.log("filteredRaffles", filteredRaffles[0].name)
 
-	const handleSubmit = () => {
-		// set to true, and never show the form again
-		setWinnerPicked(true);
+	const handleTextChange = (event) => {
+		setSecretTokenInput({ ...secretTokenInput, [event.target.id]: event.target.value });
+		console.log("secretTokenInput=>", secretTokenInput);
 	};
+
+	// set to true, and never show the form again
+	const handleSubmit = (event) => {
+		console.log("handleSubmit", winner)
+
+		if (!winner){
+		event.preventDefault();
+		// if secret token matches, get participant information	
+		// make PUT request to get the random winners
+		axios
+			.put(API + `/raffles/${id}/winner`, secretTokenInput)
+			.then((res) => {
+			
+				console.log("res.status", res.status)
+
+				if (res.status === 200){
+					setWinner(res.data);
+				} else {
+					setShowError("wrong secret token");
+				}
+				
+				console.log("RES DATA:", res.data)
+			})
+			.catch((err) => {
+				console.log(err);
+			});
+		}
+	};
+
+	console.log("WINNER=>", winner);
 
 	return (
 		<div className="Winner">
 			<div className="Winner__currentRaffleName">
-				{filteredRaffles[0].name}
+				{/* {filteredRaffles[0].name} */}
 			</div>
-			<RaffleNav />
-			{winnerPicked === false ? (
+			{!winner ? (
 				<>
 					<div className="Winner__title">Pick a Winner</div>
-					<Box sx={{ "& > :not(style)": { m: 1 } }}>
+					<div>{showError}</div>
+					<form sx={{ "& > :not(style)": { m: 1 } }}>
 						<TextField
 							required
 							fullWidth
-							id="input-with-icon-textfield"
+							id="secret_token"
+							value={secretTokenInput.secret_token}
+							onChange={handleTextChange}
 							placeholder="Secret token"
 							variant="outlined"
 							size="small"
@@ -62,7 +125,6 @@ const Winner = ({ raffles }) => {
 								),
 							}}
 						/>
-					</Box>
 					<Button
 						variant="contained"
 						onClick={handleSubmit}
@@ -80,6 +142,7 @@ const Winner = ({ raffles }) => {
 					>
 						Pick a Winner
 					</Button>
+					</form>
 					<Box>
 						<Card
 							variant="outlined"
@@ -113,20 +176,20 @@ const Winner = ({ raffles }) => {
 						</div>
 						<div className="Winner__card__details">
 							<div className="Winner__card__details__name">
-								Marvin Bosco
+								{winner.firstname} {winner.lastname} 
 							</div>
 							<div className="Winner__card__details__registeredOn">
-								Registered on Sat May 22 2021 at 8:03:17 PM
+								Registered on: {raffles[winner.id]?.created_on} 
 							</div>
 							<hr></hr>
 							<div className="Winner__card__details__info">
-								<FaHashtag /> 5
+								<FaHashtag /> {winner.id} 
 							</div>
 							<div className="Winner__card__details__info">
-								<MdEmail /> Arlene8@yahoo.com
+								<MdEmail /> {winner.email} 
 							</div>
 							<div className="Winner__card__details__info">
-								<FaPhone /> (555) 555-1234
+								<FaPhone /> {winner.phone} 
 							</div>
 						</div>
 					</div>
