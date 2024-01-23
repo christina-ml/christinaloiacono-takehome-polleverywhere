@@ -3,10 +3,16 @@ import { Link } from "react-router-dom";
 import { ImTrophy } from "react-icons/im";
 import { FaRegCalendarPlus, FaRegCalendarCheck } from "react-icons/fa";
 
-const Raffle = ({ raffle }) => {
+const Raffle = ({ raffle, currRaffleId, setCurrRaffleId }) => {
+	const updateCurrRaffleId = (e) => {
+		setCurrRaffleId(e.target.value);
+	}
+
+	const currentId = raffle.id;
+
 	return (
 		<div className="Raffle">
-			<Link to={`/raffles/${raffle.id}`}>
+			<Link to={`/raffles/${raffle.id}`} onClick={updateCurrRaffleId} value={currentId} >
 				<div className="Raffle__name">{raffle.name}</div>
 				<div className="Raffle__details">
 					<div className="Raffle__details__icon">

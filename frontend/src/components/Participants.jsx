@@ -2,7 +2,6 @@ import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 import axios from "axios";
-import RaffleNav from "./navigation/RaffleNav";
 import ParticipantDetails from "./ParticipantDetails";
 import "./Participants.scss";
 
@@ -10,14 +9,17 @@ import "./Participants.scss";
 import { IoSearchSharp } from "react-icons/io5";
 
 // Material UI
-import { Box, IconButton, InputBase, Paper } from "@mui/material";
+import { Box, IconButton, InputBase } from "@mui/material";
 
-const Participants = ({ raffles }) => {
-	const API = process.env.REACT_APP_API_URL;
+const API = process.env.REACT_APP_API_URL;
+
+const Participants = ({ raffles, currRaffleId }) => {
 	const [participants, setParticipants] = useState([]);
 	const [searchTerm, setSearchTerm] = useState("");
 
 	let { id } = useParams();
+
+	console.log("PARTICIPANTS", currRaffleId);
 
 	// Filter raffles to get name of current raffle
 	let filteredRaffles = raffles.filter(
@@ -60,9 +62,8 @@ const Participants = ({ raffles }) => {
 	return (
 		<div className="Participants">
 			<div className="Participants__currentRaffleName">
-				{filteredRaffles[0].name}
+				{/* {filteredRaffles[0].name} */}
 			</div>
-			<RaffleNav />
 			<div className="Participants__all">
 				<div className="Participants__all__title">
 					Participants: {participants.length} total
