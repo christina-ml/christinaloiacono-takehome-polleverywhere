@@ -59,7 +59,6 @@ const NewRaffleForm = ({ updateRaffles }) => {
 		if (Object.keys(errors).length === 0) {
 			setFormValid(true);
 			addRaffle(newRaffle);
-			navigate(`/raffles`);
 		} else {
 			// if there are still errors
 			setFormValid(false);
