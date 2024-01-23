@@ -1,15 +1,95 @@
 import "./RegisterSignUpForm.scss";
+import axios from "axios";
+import { useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 
 // Material UI
 import { Box, Button, ButtonGroup, TextField, InputLabel } from "@mui/material";
 
 const RegisterSignUpForm = () => {
+	const API = process.env.REACT_APP_API_URL;
+	let navigate = useNavigate();
+	const { id } = useParams();
+
+	const [formValid, setFormValid] = useState(true);
+	const [formErrors, setFormErrors] = useState({});
+	const [raffleEntry, setRaffleEntry] = useState({
+		firstname: "",
+		lastname: "",
+		email: "",
+		phone: "",
+		raffle_id: id
+	});
+
+	const addRaffleEntry = (newParticipant) => {
+		axios
+			.post(`${API}/raffles/${id}/participants`, newParticipant)
+			.then(
+				() => {
+					navigate(`/raffles/${id}/participants`);
+				},
+				(error) => console.error(error)
+			)
+			.catch((c) => console.warn("catch", c));
+	};
+
+	const handleTextChange = (event) => {
+		setRaffleEntry({ ...raffleEntry, [event.target.id]: event.target.value });
+	};
+
+	const handleSubmit = (event) => {
+		event.preventDefault();
+
+		// create errors obj
+		const errors = {};
+
+		// Check for blank fields
+		if (!raffleEntry.firstname) {
+			errors.firstname = "First Name cannot be blank";
+		}
+		if (!raffleEntry.lastname) {
+			errors.lastname = "Last Name cannot be blank";
+		}
+		if (!raffleEntry.email) {
+			errors.email = "Email cannot be blank";  // Corrected the error message
+		}
+
+		setFormErrors(errors);
+
+		// Check errors obj for any errors in the form
+		if (Object.keys(errors).length === 0) {
+			setFormValid(true);
+			addRaffleEntry(raffleEntry);
+			navigate(`/raffles/${id}`);
+		} else {
+			// if there are still errors
+			setFormValid(false);
+		}
+	};
+
+	const handleReset = (event) => {
+		event.preventDefault();
+
+		setRaffleEntry({
+		  firstname: "",
+		  lastname: "",
+		  email: "",
+		  phone: "",
+		  raffle_id: id
+		});
+	  }
+
 	return (
 		<div className="RegisterSignUpForm">
 			<div className="RegisterSignUpForm__title">
 				Register to participate in the Raffle:
 			</div>
-			<Box component="form" noValidate autoComplete="off">
+			<form 
+				onSubmit={handleSubmit}
+				component="form" 
+				noValidate 
+				autoComplete="off"
+			>
 				<div>
 					<Box
 						sx={{
@@ -40,12 +120,15 @@ const RegisterSignUpForm = () => {
 						</InputLabel>
 						<TextField
 							required
-							id="standard-required"
 							placeholder="First Name"
 							variant="outlined"
 							size="small"
 							InputLabelProps={{ shrink: true }}
 							sx={{ gridArea: "firstname" }}
+							id="firstname"
+							value={raffleEntry.firstname}
+							onChange={handleTextChange}
+							error={formErrors.firstname && !formValid}
 						/>
 						<InputLabel
 							sx={{
@@ -59,12 +142,15 @@ const RegisterSignUpForm = () => {
 						</InputLabel>
 						<TextField
 							required
-							id="standard-required"
 							placeholder="Last Name"
 							variant="outlined"
 							size="small"
 							InputLabelProps={{ shrink: true }}
 							sx={{ gridArea: "lastname" }}
+							id="lastname"
+							value={raffleEntry.lastname}
+							onChange={handleTextChange}
+							error={formErrors.lastname && !formValid}
 						/>
 						<InputLabel
 							sx={{
@@ -78,13 +164,16 @@ const RegisterSignUpForm = () => {
 						</InputLabel>
 						<TextField
 							required
-							id="standard-required"
 							placeholder="Email"
 							variant="outlined"
 							size="small"
 							InputLabelProps={{ shrink: true }}
 							// fullWidth
 							sx={{ gridArea: "email" }}
+							id="email"
+							value={raffleEntry.email}
+							onChange={handleTextChange}
+							error={formErrors.email && !formValid}
 						/>
 						<InputLabel
 							sx={{
@@ -97,13 +186,15 @@ const RegisterSignUpForm = () => {
 							Phone
 						</InputLabel>
 						<TextField
-							id="standard-required"
 							placeholder="Phone"
 							variant="outlined"
 							size="small"
 							InputLabelProps={{ shrink: true }}
 							// fullWidth
 							sx={{ gridArea: "phone" }}
+							id="phone"
+							value={raffleEntry.phone}
+							onChange={handleTextChange}
 						/>
 					</Box>
 				</div>
@@ -124,6 +215,7 @@ const RegisterSignUpForm = () => {
 					}}
 				>
 					<Button
+						type="submit"
 						sx={{
 							background: "#757575",
 							width: "150px",
@@ -136,6 +228,7 @@ const RegisterSignUpForm = () => {
 						Submit
 					</Button>
 					<Button
+						onClick={handleReset}
 						sx={{
 							background: "black",
 							width: "150px",
@@ -148,7 +241,7 @@ const RegisterSignUpForm = () => {
 						Reset
 					</Button>
 				</ButtonGroup>
-			</Box>
+			</form>
 		</div>
 	);
 };
