@@ -1,61 +1,111 @@
-import './RegisterSignUpForm.scss';
+import "./RegisterSignUpForm.scss";
 
 // Material UI
-import { Box, Button, ButtonGroup, TextField } from "@mui/material";
+import { Box, Button, ButtonGroup, TextField, InputLabel } from "@mui/material";
 
 const RegisterSignUpForm = () => {
 	return (
 		<div className="RegisterSignUpForm">
-            <div className="RegisterSignUpForm__title">
-                Register to participate in the Raffle:
-            </div>
+			<div className="RegisterSignUpForm__title">
+				Register to participate in the Raffle:
+			</div>
 			<Box component="form" noValidate autoComplete="off">
 				<div>
 					<Box
 						sx={{
+							mt: 2,
 							display: "grid",
 							gridTemplateColumns: "repeat(2, 1fr)",
 							gap: 1,
 							gridTemplateRows: "auto",
-							gridTemplateAreas: `"firstname lastname"
-                          "email email"
-                          "phone phone"`,
+							gridTemplateAreas: `
+								"firstnameLabel lastnameLabel"
+								"firstname lastname"
+								"emailLabel emailLabel"
+								"email email"
+								"phoneLabel phoneLabel"
+								"phone phone"
+							`,
 						}}
 					>
+						<InputLabel
+							sx={{
+								gridArea: "firstnameLabel",
+								color: "black",
+								fontSize: "14px",
+								fontWeight: 600,
+							}}
+						>
+							First Name*
+						</InputLabel>
 						<TextField
 							required
 							id="standard-required"
-							label="First Name"
-							defaultValue="First Name"
-							variant="standard"
+							placeholder="First Name"
+							variant="outlined"
+							size="small"
+							InputLabelProps={{ shrink: true }}
 							sx={{ gridArea: "firstname" }}
 						/>
+						<InputLabel
+							sx={{
+								gridArea: "lastnameLabel",
+								color: "black",
+								fontSize: "14px",
+								fontWeight: 600,
+							}}
+						>
+							Last Name*
+						</InputLabel>
 						<TextField
 							required
 							id="standard-required"
-							label="Last Name"
-							defaultValue="Last Name"
-							variant="standard"
+							placeholder="Last Name"
+							variant="outlined"
+							size="small"
+							InputLabelProps={{ shrink: true }}
 							sx={{ gridArea: "lastname" }}
 						/>
+						<InputLabel
+							sx={{
+								gridArea: "emailLabel",
+								color: "black",
+								fontSize: "14px",
+								fontWeight: 600,
+							}}
+						>
+							Email*
+						</InputLabel>
+						<TextField
+							required
+							id="standard-required"
+							placeholder="Email"
+							variant="outlined"
+							size="small"
+							InputLabelProps={{ shrink: true }}
+							// fullWidth
+							sx={{ gridArea: "email" }}
+						/>
+						<InputLabel
+							sx={{
+								gridArea: "phoneLabel",
+								color: "black",
+								fontSize: "14px",
+								fontWeight: 600,
+							}}
+						>
+							Phone
+						</InputLabel>
+						<TextField
+							id="standard-required"
+							placeholder="Phone"
+							variant="outlined"
+							size="small"
+							InputLabelProps={{ shrink: true }}
+							// fullWidth
+							sx={{ gridArea: "phone" }}
+						/>
 					</Box>
-					<TextField
-						required
-						id="standard-required"
-						label="Email"
-						defaultValue="Email"
-						variant="standard"
-						fullWidth
-						sx={{ gridArea: "email" }}
-					/>
-					<TextField
-						id="standard-required"
-						label="Required"
-						defaultValue="Phone"
-						variant="standard"
-						fullWidth
-						sx={{ gridArea: "phone", mt: 2 }}
-					/>
 				</div>
 				<ButtonGroup
 					variant="contained"
