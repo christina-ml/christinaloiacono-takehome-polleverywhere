@@ -18,13 +18,15 @@ import {
 } from "@mui/material";
 import { useParams } from "react-router-dom";
 
-const Winner = ({raffles}) => {
+const Winner = ({ raffles }) => {
 	const [winnerPicked, setWinnerPicked] = useState(false);
 
 	let { id } = useParams();
 
 	// Filter raffles to get name of current raffle
-	let filteredRaffles = raffles.filter((oneRaffle) => oneRaffle.id === Number(id));
+	let filteredRaffles = raffles.filter(
+		(oneRaffle) => oneRaffle.id === Number(id)
+	);
 	// console.log("filteredRaffles", filteredRaffles[0].name)
 
 	const handleSubmit = () => {
@@ -34,7 +36,9 @@ const Winner = ({raffles}) => {
 
 	return (
 		<div className="Winner">
-			<div className="Winner__currentRaffleName">{filteredRaffles[0].name}</div>
+			<div className="Winner__currentRaffleName">
+				{filteredRaffles[0].name}
+			</div>
 			<RaffleNav />
 			{winnerPicked === false ? (
 				<>
@@ -42,18 +46,21 @@ const Winner = ({raffles}) => {
 					<Box sx={{ "& > :not(style)": { m: 1 } }}>
 						<TextField
 							required
+							fullWidth
 							id="input-with-icon-textfield"
-							label="Secret Key"
-							defaultValue="$ecr3tKey"
+							placeholder="Secret token"
+							variant="outlined"
+							size="small"
 							InputProps={{
 								startAdornment: (
-									<InputAdornment position="start">
+									<InputAdornment
+										position="start"
+										sx={{ color: "#909090" }}
+									>
 										<FaKey />
 									</InputAdornment>
 								),
 							}}
-							variant="standard"
-							fullWidth
 						/>
 					</Box>
 					<Button
@@ -64,10 +71,10 @@ const Winner = ({raffles}) => {
 						sx={{
 							mt: 1,
 							mb: 2,
-							background: "#acacac",
+							background: "#D1D1D1",
 							textTransform: "none",
 							"&:hover": {
-								backgroundColor: "#acacac",
+								backgroundColor: "#D1D1D1",
 							},
 						}}
 					>
@@ -77,8 +84,9 @@ const Winner = ({raffles}) => {
 						<Card
 							variant="outlined"
 							sx={{
-								backgroundColor: "#F2F2F2",
+								backgroundColor: "#F6F6F6",
 								borderWidth: "2px",
+								borderColor: "#D5D5D5",
 							}}
 						>
 							<CardContent>

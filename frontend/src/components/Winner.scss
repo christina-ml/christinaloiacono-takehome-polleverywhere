@@ -17,7 +17,7 @@
 		margin: 0 auto;
 		width: 300px;
 		border-radius: 3px;
-		box-shadow: 0px 2px 3px $grey;
+		box-shadow: 0px 2px 3px #D1D1D1;
 
 		&__congrats {
 			img {
@@ -35,15 +35,15 @@
 			}
 
 			&__registeredOn {
-				color: $grey;
+				color: #999999;
 			}
 
 			hr {
-				color: $grey;
+				border-top: 1px solid #D1D1D1;
 			}
 
 			&__info {
-				color: $grey;
+				color: #999999;
 				display: flex;
 				place-items: center;
 				column-gap: 8px;
