@@ -25,7 +25,6 @@ const getSecretTokenByRaffleId = async (id) => {
     try {
         const secretToken= await db.one("SELECT secret_token FROM raffles WHERE id=$1 ", id);
         return secretToken;
-
     } catch (err) {
         return err;
     }

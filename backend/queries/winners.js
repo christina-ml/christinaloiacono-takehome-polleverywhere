@@ -24,7 +24,6 @@ const updateRaffleWinner = async (winner_id, raffleId) => {
         if (result.rowCount > 0) {
             // Update was successful, get the updated data
             const updatedRaffleWinner = result.rows[0];
-            // console.log('updatedRaffleWinner =>', updatedRaffleWinner);
             return updatedRaffleWinner;
         } else {
             // Add winner to winners table, instead of updating non-existing raffleId within the winners table which causes a postgres error
@@ -32,8 +31,6 @@ const updateRaffleWinner = async (winner_id, raffleId) => {
                 "INSERT INTO winners(raffle_id, winner_id) VALUES ($1, $2) RETURNING *",
                 [raffleId, winner_id]
             );
-
-            // console.log('New winner added:', newWinner);
             return newWinner;
         }
     } catch (error) {

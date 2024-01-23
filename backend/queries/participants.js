@@ -15,7 +15,6 @@ const getAllParticipantsByRaffleId = async (raffle_id) => {
 
 // GET	/api/raffles/:id/participants
 const getParticipantById = async (id) => {
-    console.log("GET id", id)
     try {
         const allParticipantsByRaffleId = await db.one(
             "SELECT * FROM participants WHERE id=$1", 

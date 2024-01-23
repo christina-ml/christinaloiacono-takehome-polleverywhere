@@ -20,11 +20,8 @@ winners.get("/", async (req, res) => {
 
 	try {
 		const winners = await getAllWinnersByRaffleId(raffleId);
-		console.log("winners", winners);
 		const [winner] = winners;
-		console.log("winner", winner);
 		const { winner_id } = winner;
-		console.log("winner_id", winner_id);
 
 		if (winner_id) {
 			const participantInfo = await getParticipantById(winner_id);
@@ -45,23 +42,16 @@ winners.get("/", async (req, res) => {
 // PUT	/api/raffles/:id/winner
 winners.put("/", async (req, res) => {
 	const { raffleId } = req.params;
-	console.log("raffleId ==>", raffleId);
-
-	console.log("req secret token", req.body);
 
 	try {
 		// check for secret token
 		const secretToken = await getSecretTokenByRaffleId(raffleId);
-
-        console.log("secretToken", secretToken, req.body.secret_token)
 
 		if (secretToken?.secret_token !== req.body.secret_token) {
 			res.status(204).json({ error: `wrong secret token` });
 		} else {
 			// query list of raflle participants to use for randomWinnerId fn
 			const participants = await getAllParticipantsByRaffleId(raffleId);
-			console.log("participants =>", participants);
-			// console.log('numberOfParticipants =>', participants.length);
 
 			// check if there are participants in the raffle
 			if (participants.length >= 1) {
@@ -70,11 +60,9 @@ winners.put("/", async (req, res) => {
 					participants[
 						Math.floor(Math.random() * participants.length)
 					].id;
-				console.log("randomWinnerId =>", randomWinnerId);
 
 				// query to check if raffle has a winner
 				const winner = await getAllWinnersByRaffleId(raffleId);
-				console.log("winners =>", winner);
 
 				// if no winner has been chosen for this raffle, run query to update winners table with a PUT request.
 				if (!winner[0]?.winner_id) {
@@ -82,7 +70,6 @@ winners.put("/", async (req, res) => {
 						randomWinnerId,
 						raffleId
 					);
-					console.log("randomRaffleWinner =>", randomRaffleWinner);
 
 					const participantInfo = await getParticipantById(
 						randomRaffleWinner.id
