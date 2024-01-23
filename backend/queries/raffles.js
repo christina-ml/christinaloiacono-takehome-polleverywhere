@@ -20,6 +20,17 @@ const getOneRaffleById = async (id) => {
     }
 }
 
+// GET	/api/raffles/:id
+const getSecretTokenByRaffleId = async (id) => {
+    try {
+        const secretToken= await db.one("SELECT secret_token FROM raffles WHERE id=$1 ", id);
+        return secretToken;
+
+    } catch (err) {
+        return err;
+    }
+}
+
 // 	POST	/api/raffles
 const createNewRaffle = async (raffle) => {
     const { name, secret_token } = raffle;
@@ -37,5 +48,6 @@ const createNewRaffle = async (raffle) => {
 module.exports = {
     getAllRaffles,
     getOneRaffleById,
+    getSecretTokenByRaffleId,
     createNewRaffle,
 };

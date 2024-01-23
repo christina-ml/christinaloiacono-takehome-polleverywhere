@@ -13,6 +13,20 @@ const getAllParticipantsByRaffleId = async (raffle_id) => {
     }
 }
 
+// GET	/api/raffles/:id/participants
+const getParticipantById = async (id) => {
+    console.log("GET id", id)
+    try {
+        const allParticipantsByRaffleId = await db.one(
+            "SELECT * FROM participants WHERE id=$1", 
+            id
+        );
+        return allParticipantsByRaffleId;
+    } catch (err) {
+        return err;
+    }
+}
+
 // POST	/api/raffles/:id/participants
 const signUpOneParticipantByRaffleId = async (raffle_id, participants) => {
     const {firstname, lastname, email, phone } = participants;
@@ -35,5 +49,6 @@ const signUpOneParticipantByRaffleId = async (raffle_id, participants) => {
 
 module.exports = {
     getAllParticipantsByRaffleId,
+    getParticipantById,
     signUpOneParticipantByRaffleId
 };
