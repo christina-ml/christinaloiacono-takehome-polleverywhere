@@ -9,6 +9,7 @@ import ErrorPage from "./components/ErrorPage";
 import "./App.scss";
 import { useEffect, useState, createContext } from "react";
 import axios from "axios";
+import Loading from "./helpers/Loading";
 
 function App() {
 	const API = process.env.REACT_APP_API_URL;
@@ -35,7 +36,7 @@ function App() {
 
 	if (loading) {
 		return (
-			<div>Loading...</div>
+			<Loading />
 		)
 	}
 
@@ -51,7 +52,7 @@ function App() {
 		<div className="App">
 			<main>
 				<NavBar />
-				<RaffleNav currRaffleId={currRaffleId} />
+				<RaffleNav currRaffleId={currRaffleId} raffles={raffles} />
 				<RaffleContext.Provider value={currRaffleId}>
 				<Routes>
 					<Route path="/" element={<Home raffles={raffles} updateRaffles={updateRaffles} currRaffleId={currRaffleId} setCurrRaffleId={setCurrRaffleId}/>}/>

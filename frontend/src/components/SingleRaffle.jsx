@@ -2,9 +2,8 @@ import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import RegisterSignUpForm from "./RegisterSignUpForm";
-import "./SingleRaffle.scss";
 
-const SingleRaffle = ({ currRaffleId, setCurrRaffleId }) => {
+const SingleRaffle = ({ setCurrRaffleId }) => {
 	const API = process.env.REACT_APP_API_URL;
 	const [raffle, setRaffle] = useState([]);
 
@@ -24,7 +23,6 @@ const SingleRaffle = ({ currRaffleId, setCurrRaffleId }) => {
 
 	return (
 		<div className="SingleRaffle">
-			<div className="SingleRaffle__title">{raffle.name}</div>
 			<RegisterSignUpForm />
 		</div>
 	);

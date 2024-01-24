@@ -19,11 +19,6 @@ const Participants = ({ raffles, currRaffleId }) => {
 
 	let { id } = useParams();
 
-	// Filter raffles to get name of current raffle
-	let filteredRaffles = raffles.filter(
-		(oneRaffle) => oneRaffle.id === Number(id)
-	);
-
 	useEffect(() => {
 		try {
 			axios
@@ -58,9 +53,6 @@ const Participants = ({ raffles, currRaffleId }) => {
 
 	return (
 		<div className="Participants">
-			<div className="Participants__currentRaffleName">
-				{/* {filteredRaffles[0].name} */}
-			</div>
 			<div className="Participants__all">
 				<div className="Participants__all__title">
 					Participants: {participants.length} total

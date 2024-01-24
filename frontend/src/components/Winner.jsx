@@ -18,7 +18,7 @@ import {
 import { useParams } from "react-router-dom";
 import axios from "axios";
 
-const Winner = ({ raffles, currRaffleId, raffleContext }) => {
+const Winner = ({ raffles }) => {
 	const API = process.env.REACT_APP_API_URL;
 	let { id } = useParams();
 	const [winner, setWinner] = useState('');
@@ -41,11 +41,6 @@ const Winner = ({ raffles, currRaffleId, raffleContext }) => {
 	});
 
 	const [showError, setShowError] = useState('');
-
-	// Filter raffles to get name of current raffle
-	let filteredRaffles = raffles.filter(
-		(oneRaffle) => oneRaffle.id === Number(id)
-	);
 
 	const handleTextChange = (event) => {
 		setSecretTokenInput({ ...secretTokenInput, [event.target.id]: event.target.value });
@@ -74,9 +69,6 @@ const Winner = ({ raffles, currRaffleId, raffleContext }) => {
 
 	return (
 		<div className="Winner">
-			<div className="Winner__currentRaffleName">
-				{/* {filteredRaffles[0].name} */}
-			</div>
 			{!winner ? (
 				<>
 					<div className="Winner__title">Pick a Winner</div>

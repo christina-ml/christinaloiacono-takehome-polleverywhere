@@ -1,4 +1,3 @@
-import "./Home.scss";
 import NewRaffleForm from "./NewRaffleForm";
 import AllRaffles from "./AllRaffles";
 

@@ -47,7 +47,7 @@ LinkTab.propTypes = {
   selected: PropTypes.bool,
 };
 
-const RaffleNav = ({ currRaffleId, setCurrRaffleId }) => {
+const RaffleNav = ({ currRaffleId, raffles }) => {
 	const id = currRaffleId;
 	let location = useLocation();
 	
@@ -58,6 +58,8 @@ const RaffleNav = ({ currRaffleId, setCurrRaffleId }) => {
 	
 	return (
 		location.pathname !== '/' &&
+		<>
+		<div className="RaffleNavTitle">{raffles[Number(id) -1]?.name}</div>
 		<div className="RaffleNav">
 			<Box>
 				<Tabs
@@ -118,6 +120,7 @@ const RaffleNav = ({ currRaffleId, setCurrRaffleId }) => {
 				</Tabs>
 			</Box>
 		</div>
+		</>
 	);
 };
 
