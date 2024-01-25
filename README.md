@@ -54,6 +54,10 @@ Technologies:
 - [pg-promise](https://www.npmjs.com/package/pg-promise) - PostgreSQL interface for Node.js
 - [cors](https://www.npmjs.com/package/cors) - Cross-origin resource sharing (CORS)
 
+### Entity Relationship Diagram (ERD)
+![Raffle app ERD](https://github.com/christina-ml/christinaloiacono-takehome-polleverywhere/assets/65386414/3077325d-fe06-41b8-883c-87fb7a25fc92)
+
+
 # Frontend
 
 Technologies: 
