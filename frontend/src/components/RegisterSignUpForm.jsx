@@ -129,6 +129,7 @@ const RegisterSignUpForm = () => {
 							value={raffleEntry.firstname}
 							onChange={handleTextChange}
 							error={formErrors.firstname && !formValid}
+							helperText={formErrors.firstname || ""}
 						/>
 						<InputLabel
 							sx={{
@@ -151,6 +152,7 @@ const RegisterSignUpForm = () => {
 							value={raffleEntry.lastname}
 							onChange={handleTextChange}
 							error={formErrors.lastname && !formValid}
+							helperText={formErrors.lastname || ""}
 						/>
 						<InputLabel
 							sx={{
@@ -174,6 +176,7 @@ const RegisterSignUpForm = () => {
 							value={raffleEntry.email}
 							onChange={handleTextChange}
 							error={formErrors.email && !formValid}
+							helperText={formErrors.email || ""}
 						/>
 						<InputLabel
 							sx={{
