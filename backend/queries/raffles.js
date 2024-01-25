@@ -3,7 +3,11 @@ const db = require("../db/dbConfig");
 // GET	/api/raffles
 const getAllRaffles = async () => {
     try {
-        const allRaffles = await db.any("SELECT * FROM raffles");
+        const allRaffles = await db.any(`SELECT
+        *
+      FROM
+        raffles
+        LEFT JOIN winners ON winners.raffle_id = raffles.id`);
         return allRaffles;
     } catch (err) {
         return err;

@@ -4,8 +4,8 @@ INSERT INTO raffles (name, secret_token, created_on, raffled_on) VALUES
 ('Awesome Pet Basket Raffle', 'aBc123PE',  '2024-01-29 10:56:00', '2024-08-06 10:15:21'),
 ('Staycation Gift Card Raffle', '432xyZee', '2022-10-29 10:56:00', '2024-01-08 09:12:23'),
 ('Sports Raffle', '2H4s3w', '2024-11-11 11:12:01', null),
-('PollEv Beach Getaway Raffle', '854w9n', '2021-05-11 13:12:01', '2023-03-24 10:56:00'),
-('Charity Raffle', '7f2G32c', '2020-08-14 11:32:01', '2022-10-24 04:32:42'),
+('PollEv Beach Getaway Raffle', '854w9n', '2021-05-11 13:12:01', null),
+('Charity Raffle', '7f2G32c', '2020-08-14 11:32:01', null),
 ('Swimming Pool Raffle', 't5t7MvPe7', '2018-10-24 04:32:42', null);
 
 INSERT INTO participants (firstname, lastname, email, phone, raffle_id) VALUES
