@@ -12,6 +12,9 @@
 	&__profile {
 		margin-right: 10px;
 		img {
+			filter: grayscale(100%);
+			height: 150px;
+			width: 150px;
 			border-radius: 50%;
 		}
 	}

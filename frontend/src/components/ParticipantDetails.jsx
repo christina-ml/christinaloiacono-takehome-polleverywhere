@@ -9,7 +9,7 @@ const ParticipantDetails = ({ participant }) => {
 		<div className="ParticipantDetails">
 			<div className="ParticipantDetails__profile">
 				<img
-					src="https://placehold.co/150"
+					src="https://financemd.files.wordpress.com/2015/08/facebook-default-no-profile-pic.jpg"
 					alt={`participant # ${participant.id} profile`}
 				/>
 			</div>
