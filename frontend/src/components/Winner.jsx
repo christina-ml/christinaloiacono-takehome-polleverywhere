@@ -17,6 +17,8 @@ import {
 } from "@mui/material";
 import { useParams } from "react-router-dom";
 import axios from "axios";
+import convertISOStringToDate from "../helpers/convertISOStringToDate";
+import convertISOStringToTime from "../helpers/convertISOStringToTime";
 
 const Winner = ({ raffles }) => {
 	const API = process.env.REACT_APP_API_URL;
@@ -148,7 +150,7 @@ const Winner = ({ raffles }) => {
 								{winner.firstname} {winner.lastname} 
 							</div>
 							<div className="Winner__card__details__registeredOn">
-								Registered on: {raffles[winner.id]?.created_on} 
+								Registered on: {convertISOStringToDate(raffles[winner.id]?.created_on)} at {convertISOStringToTime(raffles[winner.id]?.created_on)}
 							</div>
 							<hr></hr>
 							<div className="Winner__card__details__info">

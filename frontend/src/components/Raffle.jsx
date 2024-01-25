@@ -2,8 +2,10 @@ import "./Raffle.scss";
 import { Link } from "react-router-dom";
 import { ImTrophy } from "react-icons/im";
 import { FaRegCalendarPlus, FaRegCalendarCheck } from "react-icons/fa";
+import convertISOStringToTime from "../helpers/convertISOStringToTime";
+import convertISOStringToDate from "../helpers/convertISOStringToDate";
 
-const Raffle = ({ raffle, currRaffleId, setCurrRaffleId }) => {
+const Raffle = ({ raffle, winner, currRaffleId, setCurrRaffleId }) => {
 	const updateCurrRaffleId = (e) => {
 		setCurrRaffleId(e.target.value);
 	}
@@ -18,20 +20,32 @@ const Raffle = ({ raffle, currRaffleId, setCurrRaffleId }) => {
 					<div className="Raffle__details__icon">
 						<FaRegCalendarPlus />
 					</div>
-					<div>Created on: {raffle.created_on}</div>
+					<div>
+						<span>
+							Created on: {convertISOStringToDate(raffle.created_on)} at {convertISOStringToTime(raffle.created_on)}
+						</span>
+					</div>
 				</div>
 				<div className="Raffle__details">
 					<div className="Raffle__details__icon">
 						<ImTrophy />
 					</div>
-					<div>Winner Id: {raffle.raffle_winner || "No one yet"}</div>
+					<div>Winner Id: {raffle?.winner_id || "No one yet"}</div>
 				</div>
 				<div className="Raffle__details">
 					<div className="Raffle__details__icon">
 						<FaRegCalendarCheck />
 					</div>
 					<div>
-						Raffled on: {raffle.raffled_on || "Not raffled yet"}
+						{raffle.raffled_on ? 
+						<span>
+							Raffled on: {convertISOStringToDate(raffle.raffled_on)} at {convertISOStringToTime(raffle.raffled_on) || "Not raffled yet"}
+						</span>
+						:
+						<span>
+							Raffled on: Not raffled yet
+						</span>
+						}
 					</div>
 				</div>
 			</Link>

@@ -2,8 +2,8 @@ import "./Loading.scss";
 
 function Loading() {
 	return (
-		<div class="Loading">
-            <div class="Loading__spinner"></div>
+		<div className="Loading">
+            <div className="Loading__spinner"></div>
         </div>
 	);
 }
