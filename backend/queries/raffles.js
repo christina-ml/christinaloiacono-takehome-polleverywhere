@@ -7,7 +7,9 @@ const getAllRaffles = async () => {
         *
       FROM
         raffles
-        LEFT JOIN winners ON winners.raffle_id = raffles.id`);
+        LEFT JOIN winners ON winners.raffle_id = raffles.id
+        ORDER BY raffles.created_on DESC
+        `);
         return allRaffles;
     } catch (err) {
         return err;
